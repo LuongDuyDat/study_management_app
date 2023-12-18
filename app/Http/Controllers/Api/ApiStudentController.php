@@ -8,7 +8,6 @@ use App\Http\Resources\StudentExerciseResource;
 use App\Http\Resources\StudentResource;
 use App\Http\Resources\SubjectResource;
 use App\Models\Student;
-use App\Models\StudentExercise;
 use Illuminate\Http\Request;
 
 class ApiStudentController extends Controller

@@ -1,5 +1,12 @@
 <?php
 
+use App\Http\Controllers\Api\ApiAssignmentController;
+use App\Http\Controllers\Api\ApiExerciseFileController;
+use App\Http\Controllers\Api\ApiLectureController;
+use App\Http\Controllers\Api\ApiLecturerController;
+use App\Http\Controllers\Api\ApiStudentController;
+use App\Http\Controllers\Api\ApiStudentExerciseController;
+use App\Http\Controllers\Api\ApiSubjectController;
 use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\ExerciseFileController;
 use App\Http\Controllers\LectureController;
@@ -27,42 +34,43 @@ Route::middleware('auth:sanctum')->group(function() {
     });
 });
 
-Route::controller(AssignmentController::class)->group(function() {
+Route::controller(ApiAssignmentController::class)->group(function() {
     Route::get('/assignments/{assignment}/exercises', 'getExercises');
-    Route::apiResources('assignments');
+    Route::apiResource('assignments', ApiAssignmentController::class);
 });
 
-Route::controller(ExerciseFileController::class)->group(function() {
-    Route::apiResources('exercises_files');
+Route::controller(ApiExerciseFileController::class)->group(function() {
+    Route::apiResource('exercises_files', ApiExerciseFileController::class);
 });
 
-Route::controller(LectureController::class)->group(function() {
-    Route::apiResources('lectures');
+Route::controller(ApiLectureController::class)->group(function() {
+    Route::apiResource('lectures', ApiLectureController::class);
 });
 
-Route::controller(LecturerController::class)->group(function() {
+Route::controller(ApiLecturerController::class)->group(function() {
     Route::get('/lecturers/{lecturer}/subjects', 'getSubjects');
     Route::get('/lecturers/{lecturer}/assignments', 'getAssignments');
     Route::get('/lecturers/{lecturer}/lectures', 'getLectures');
-    Route::apiResources('lecturers');
+    Route::apiResource('lecturers', ApiLecturerController::class);
 });
 
-Route::controller(StudentController::class)->group(function() {
+Route::controller(ApiStudentController::class)->group(function() {
     Route::get('/students/{student}/subjects', 'getSubjects');
     Route::get('/students/{student}/exercises', 'getExercises');
     Route::get('/students/{student}/assignments', 'getAssignments');
-    Route::apiResources('students');
+    Route::apiResource('students', ApiStudentController::class);
 });
 
-Route::controller(StudentExerciseController::class)->group(function() {
+Route::controller(ApiStudentExerciseController::class)->group(function() {
     Route::get('/exercises/{student_exercise}/exercise_files', 'getExercisesFile');
     Route::get('/exercises/{student_exercise}/assignment', 'getAssignment');
-    Route::apiResources('exercises');
+    Route::apiResource('exercises', ApiStudentExerciseController::class);
 });
 
-Route::controller(SubjectController::class)->group(function() {
+Route::controller(ApiSubjectController::class)->group(function() {
     Route::get('/subjects/{subject}/students', 'getStudents');
     Route::get('/subjects/{subject}/lecturer', 'getLecturer');
     Route::get('/subjects/{subject}/assignments', 'getAssignments');
     Route::get('/subjects/{subject}/lectures', 'getLectures');
+    Route::apiResource('subjects', ApiSubjectController::class);
 });
