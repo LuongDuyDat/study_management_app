@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\AssignmentResource;
+use App\Http\Resources\StudentExerciseResource;
 use App\Http\Resources\StudentResource;
+use App\Http\Resources\SubjectResource;
 use App\Models\Student;
+use App\Models\StudentExercise;
 use Illuminate\Http\Request;
 
 class ApiStudentController extends Controller
@@ -47,5 +51,29 @@ class ApiStudentController extends Controller
     public function destroy(Student $student)
     {
         $student->delete();
+    }
+
+    /**
+     * Get all subjects that this student learn
+     */
+    public function getSubjects(Student $student)
+    {
+        return new SubjectResource($student->subjects());
+    }
+
+    /**
+     * Get all exercises that this student has submitted
+     */
+    public function getExercises(Student $student)
+    {
+        return new StudentExerciseResource($student->exercises());
+    }
+
+    /**
+     * Get all assignments that this student has been given
+     */
+    public function getAssignments(Student $student)
+    {
+        return new AssignmentResource($student->assignments());
     }
 }

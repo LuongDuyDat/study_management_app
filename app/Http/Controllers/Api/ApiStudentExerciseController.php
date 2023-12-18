@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\AssignmentResource;
+use App\Http\Resources\ExerciseFileResource;
 use App\Http\Resources\StudentExerciseResource;
+use App\Models\Student;
 use App\Models\StudentExercise;
 use Illuminate\Http\Request;
 
@@ -47,5 +50,21 @@ class ApiStudentExerciseController extends Controller
     public function destroy(StudentExercise $studentExercise)
     {
         $studentExercise->delete();
+    }
+
+    /**
+     * Get all exercises file of this resource
+     */
+    public function getExerciseFiles(StudentExercise $studentExercise)
+    {
+        return new ExerciseFileResource($studentExercise->exerciseFile());
+    }
+
+    /**
+     * Get the assignment that this resource belong to
+     */
+    public function getAssignment(StudentExercise $studentExercise)
+    {
+        return new AssignmentResource($studentExercise->assignment());
     }
 }

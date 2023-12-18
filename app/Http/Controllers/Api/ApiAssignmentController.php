@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\AssignmentResource;
+use App\Http\Resources\StudentExerciseResource;
 use App\Models\Assignment;
 use Illuminate\Http\Request;
 
@@ -47,5 +48,13 @@ class ApiAssignmentController extends Controller
     public function destroy(Assignment $assignment)
     {
         $assignment->delete();
+    }
+
+    /**
+     * Get all Exerciise of the resource
+     */
+    public function getExercises(Assignment $assignment)
+    {
+        return new StudentExerciseResource($assignment->studentExercises());
     }
 }
