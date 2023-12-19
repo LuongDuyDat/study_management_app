@@ -20,7 +20,7 @@ class StudentExerciseFactory extends Factory
     public function definition(): array
     {
         return [
-            'result' => fake()->randomFloat(0, 10),
+            'result' => fake()->randomFloat(1, 0, 10),
             'comment' => fake()->paragraph(2),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
