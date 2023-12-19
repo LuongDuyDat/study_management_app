@@ -18,8 +18,8 @@ class LecturerResource extends JsonResource
            'lecturer_id' => $this->lecturer_id,
            'name' => $this->name,
            'email' => $this->email,
-           'create_at' => $this->create_at,
-           'update_at' => $this->update_at, 
+           'created_at' => $this->created_at,
+           'updated_at' => $this->updated_at, 
         ];
     }
 }

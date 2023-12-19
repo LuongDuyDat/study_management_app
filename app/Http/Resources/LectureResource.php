@@ -19,8 +19,8 @@ class LectureResource extends JsonResource
             'lecture_file' => $this->lecture_file,
             'start_at' => $this->start_at,
             'end_at' => $this->end_at,
-            'create_at' => $this->create_at,
-            'update_at' => $this->update_at,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
             'subject_id' => $this->subject_id,
         ];
     }

@@ -17,8 +17,8 @@ class ExerciseFileResource extends JsonResource
         return [
             'exercise_file_id' => $this->exercise_file_id,
             'exercise_file' => $this->exercise_file,
-            'create_at' => $this->create_at,
-            'update_at' => $this->update_at,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
             'exercise_id' => $this->exercise_id,
         ];
     }

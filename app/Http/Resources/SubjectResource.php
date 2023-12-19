@@ -22,8 +22,8 @@ class SubjectResource extends JsonResource
             'start_date' => $this->start_date,
             'end_date' => $this->end_date,
             'lecturer_id' => $this->lecturer_id,
-            'create_at' => $this->create_at,
-            'update_at' => $this->update_at,  
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,  
         ];
     }
 }

@@ -21,7 +21,7 @@ class Subject extends Model
     /** List all students of the subject */
     public function students():BelongsToMany
     {
-        return $this->belongsToMany(Student::class);
+        return $this->belongsToMany(Student::class, 'student_subject', 'subject_id', 'student_id');
     }
 
     /** The lecturer has taught this subject */

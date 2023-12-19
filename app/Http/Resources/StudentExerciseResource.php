@@ -20,8 +20,8 @@ class StudentExerciseResource extends JsonResource
             'comment' => $this->comment,
             'student_id' => $this->student_id,
             'assignment_id' => $this->assignment_id,
-            'create_at' => $this->create_at,
-            'update_at' => $this->update_at,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ];
     }
 }

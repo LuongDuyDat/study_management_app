@@ -21,7 +21,8 @@ class AssignmentResource extends JsonResource
             'assignment_file' => $this->assignment_file,
             'start_at' => $this->start_at,
             'end_at' => $this->end_at,
-            'create_at' => $this->create_at,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
             'subject_id' => $this->subject_id,
         ];
     }

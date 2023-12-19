@@ -21,7 +21,7 @@ class Student extends Model
     /** Get subjects that students learn */
     public function subjects():BelongsToMany
     {
-        return $this->belongsToMany(Subject::class);
+        return $this->belongsToMany(Subject::class, 'student_subject', 'student_id', 'subject_id');
     }
 
     /**Get all exercise student have submitted */
