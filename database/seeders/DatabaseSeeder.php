@@ -35,8 +35,12 @@ class DatabaseSeeder extends Seeder
                             ->create();
         $subjects = Subject::factory()
                             ->count(20)
-                            ->hasAttached($students)
                             ->create();
+        foreach ($subjects as $subject) 
+        {
+            $randomStudents = Student::all()->random(random_int(5, 10));
+            $subject->students()->attach($randomStudents);
+        }
         $assignments = Assignment::factory()
                             ->count(50)
                             ->create();
