@@ -41,7 +41,8 @@ class ApiStudentExerciseController extends Controller
      */
     public function update(Request $request, StudentExercise $studentExercise)
     {
-        return new StudentExerciseResource($studentExercise->update($request->all()));
+        $studentExercise->update($request->all());
+        return new StudentExerciseResource($studentExercise);
     }
 
     /**
@@ -57,7 +58,7 @@ class ApiStudentExerciseController extends Controller
      */
     public function getExerciseFiles(StudentExercise $studentExercise)
     {
-        return new ExerciseFileResource($studentExercise->exerciseFile());
+        return ExerciseFileResource::collection($studentExercise->exerciseFile);
     }
 
     /**
@@ -65,6 +66,6 @@ class ApiStudentExerciseController extends Controller
      */
     public function getAssignment(StudentExercise $studentExercise)
     {
-        return new AssignmentResource($studentExercise->assignment());
+        return new AssignmentResource($studentExercise->assignment);
     }
 }

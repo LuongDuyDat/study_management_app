@@ -7,7 +7,9 @@ use App\Http\Resources\AssignmentResource;
 use App\Http\Resources\StudentExerciseResource;
 use App\Http\Resources\StudentResource;
 use App\Http\Resources\SubjectResource;
+use App\Models\Assignment;
 use App\Models\Student;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
 class ApiStudentController extends Controller
@@ -17,7 +19,7 @@ class ApiStudentController extends Controller
      */
     public function index()
     {
-        return new StudentResource(Student::all());
+        return StudentResource::collection(Student::all());
     }
 
     /**
@@ -41,7 +43,8 @@ class ApiStudentController extends Controller
      */
     public function update(Request $request, Student $student)
     {
-        return new StudentResource($student->update($request->all()));
+        $student->update($request->all());
+        return new StudentResource($student);
     }
 
     /**
@@ -57,7 +60,7 @@ class ApiStudentController extends Controller
      */
     public function getSubjects(Student $student)
     {
-        return new SubjectResource($student->subjects());
+        return SubjectResource::collection($student->subjects);
     }
 
     /**
@@ -65,7 +68,7 @@ class ApiStudentController extends Controller
      */
     public function getExercises(Student $student)
     {
-        return new StudentExerciseResource($student->exercises());
+        return StudentExerciseResource::collection($student->exercises);
     }
 
     /**
@@ -73,6 +76,19 @@ class ApiStudentController extends Controller
      */
     public function getAssignments(Student $student)
     {
-        return new AssignmentResource($student->assignments());
+        $subjects = $student->subjects;
+
+        $assignmentList = new Collection();
+
+        foreach ($subjects as $subject) 
+        {
+            $assignments = $subject->assignments;
+            foreach($assignments as $assignment)
+            {
+                $assignmentList->add($assignment);
+            }
+        }
+        
+        return AssignmentResource::collection($assignmentList);
     }
 }

@@ -9,6 +9,7 @@ use App\Http\Resources\LecturerResource;
 use App\Http\Resources\SubjectResource;
 use App\Models\Lecture;
 use App\Models\Lecturer;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
 class ApiLecturerController extends Controller
@@ -18,7 +19,7 @@ class ApiLecturerController extends Controller
      */
     public function index()
     {
-        return new LecturerResource(Lecturer::all());
+        return LecturerResource::collection(Lecturer::all());
     }
 
     /**
@@ -42,7 +43,8 @@ class ApiLecturerController extends Controller
      */
     public function update(Request $request, Lecturer $lecturer)
     {
-        return new LecturerResource($lecturer->update($request->all()));
+        $lecturer->update($request->all());
+        return new LecturerResource($lecturer);
     }
 
     /**
@@ -58,7 +60,7 @@ class ApiLecturerController extends Controller
      */
     public function getSubjects(Lecturer $lecturer) 
     {
-        return new SubjectResource($lecturer->subjects());
+        return SubjectResource::collection($lecturer->subjects);
     }
 
     /**
@@ -66,7 +68,7 @@ class ApiLecturerController extends Controller
      */
     public function getAssignments(Lecturer $lecturer)
     {
-        return new AssignmentResource($lecturer->assignments());
+        return AssignmentResource::collection($lecturer->assignments);
     }
 
     /**
@@ -74,6 +76,6 @@ class ApiLecturerController extends Controller
      */
     public function getLectures(Lecturer $lecturer)
     {
-        return new LectureResource($lecturer->lectures());
+        return LectureResource::collection($lecturer->lectures);
     }
 }

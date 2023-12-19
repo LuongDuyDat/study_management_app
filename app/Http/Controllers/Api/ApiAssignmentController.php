@@ -15,7 +15,7 @@ class ApiAssignmentController extends Controller
      */
     public function index()
     {
-        return new AssignmentResource(Assignment::all());
+        return AssignmentResource::collection(Assignment::all());
     }
 
     /**
@@ -39,7 +39,8 @@ class ApiAssignmentController extends Controller
      */
     public function update(Request $request, Assignment $assignment)
     {
-        return new AssignmentResource($assignment->update($request->all()));
+        $assignment->update($request->all());
+        return new AssignmentResource($assignment);
     }
 
     /**
@@ -55,6 +56,6 @@ class ApiAssignmentController extends Controller
      */
     public function getExercises(Assignment $assignment)
     {
-        return new StudentExerciseResource($assignment->studentExercises());
+        return StudentExerciseResource::collection($assignment->studentExercises);
     }
 }

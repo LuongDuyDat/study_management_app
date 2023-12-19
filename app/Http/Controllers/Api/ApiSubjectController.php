@@ -18,7 +18,7 @@ class ApiSubjectController extends Controller
      */
     public function index()
     {
-        return new SubjectResource(Subject::all());
+        return SubjectResource::collection(Subject::all());
     }
 
     /**
@@ -42,7 +42,8 @@ class ApiSubjectController extends Controller
      */
     public function update(Request $request, Subject $subject)
     {
-        return new SubjectResource($subject->update($request->all()));
+        $subject->update($request->all());
+        return new SubjectResource($subject);
     }
 
     /**
@@ -58,7 +59,7 @@ class ApiSubjectController extends Controller
      */
     public function getStudents(Subject $subject)
     {
-        return new StudentResource($subject->students());
+        return StudentResource::collection($subject->students());
     }
 
     /**
@@ -66,7 +67,7 @@ class ApiSubjectController extends Controller
      */
     public function getLecturer(Subject $subject)
     {
-        return new LecturerResource($subject->lecturer());
+        return new LecturerResource($subject->lecturer);
     }
 
     /**
@@ -74,7 +75,7 @@ class ApiSubjectController extends Controller
      */
     public function getLectures(Subject $subject)
     {
-        return new LectureResource($subject->lectures());
+        return LectureResource::collection($subject->lectures);
     }
 
     /**
@@ -82,6 +83,6 @@ class ApiSubjectController extends Controller
      */
     public function getAssignments(Subject $subject)
     {
-        return new AssignmentResource($subject->assignments());
+        return AssignmentResource::collection($subject->assignments);
     }
 }

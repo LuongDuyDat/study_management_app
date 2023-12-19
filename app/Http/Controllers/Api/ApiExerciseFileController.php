@@ -14,7 +14,7 @@ class ApiExerciseFileController extends Controller
      */
     public function index()
     {
-        return new ExerciseFileResource(ExerciseFile::all());
+        return ExerciseFileResource::collection(ExerciseFile::all());
     }
 
     /**
@@ -38,7 +38,8 @@ class ApiExerciseFileController extends Controller
      */
     public function update(Request $request, ExerciseFile $exerciseFile)
     {
-        return new ExerciseFileResource($exerciseFile->update($request->all()));
+        $exerciseFile->update($request->all());
+        return new ExerciseFileResource($exerciseFile);
     }
 
     /**

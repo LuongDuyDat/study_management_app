@@ -15,7 +15,7 @@ class ApiLectureController extends Controller
      */
     public function index()
     {
-        return new LectureResource(Lecture::all());
+        return LectureResource::collection(Lecture::all());
     }
 
     /**
@@ -39,7 +39,8 @@ class ApiLectureController extends Controller
      */
     public function update(Request $request, Lecture $lecture)
     {
-        return new LectureResource($lecture->update($request->all()));
+        $lecture->update($request->all());
+        return new LectureResource($lecture);
     }
 
     /**
