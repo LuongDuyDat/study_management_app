@@ -18,6 +18,9 @@ class Subject extends Model
     /* The primary key */
     protected $primaryKey = 'subject_id';
 
+    /* The attributes can be mass assignment */
+    protected $fillable = ['id', 'name', 'credit_number', 'start_date', 'end_date'];
+
     /** List all students of the subject */
     public function students():BelongsToMany
     {
@@ -27,18 +30,18 @@ class Subject extends Model
     /** The lecturer has taught this subject */
     public function lecturer():BelongsTo
     {
-        return $this->belongsTo(Lecturer::class);
+        return $this->belongsTo(Lecturer::class, 'lecturer_id');
     }
 
     /** List all lectures */
     public function lectures():HasMany
     {
-        return $this->hasMany(Lecture::class);
+        return $this->hasMany(Lecture::class, 'subject_id');
     }
 
     /** List all assignments */
     public function assignments():HasMany
     {
-        return $this->hasMany(Assignment::class);
+        return $this->hasMany(Assignment::class, 'subject_id');
     }
 }

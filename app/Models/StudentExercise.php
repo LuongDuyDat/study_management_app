@@ -17,6 +17,9 @@ class StudentExercise extends Model
     /* The primay key */
     protected $primayKey = 'exercise_id';
 
+    /* The attributes can be mass assignment */
+    protected $fillable = ['result', 'comment'];
+
     /* List file in Student Exercise */
     public function exerciseFile():HasMany
     {
@@ -26,6 +29,6 @@ class StudentExercise extends Model
     /* Show this file belong to assignment */
     public function assignment():BelongsTo
     {
-        return $this->belongsTo(Assignment::class);
+        return $this->belongsTo(Assignment::class, 'assignment_id');
     }
 }

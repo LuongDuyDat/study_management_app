@@ -15,23 +15,26 @@ class Lecturer extends Model
     protected $table = 'lecturer';
 
     /* The primary key */
-    protected $primayKey = 'lecturer_id';
+    protected $primaryKey = 'lecturer_id';
+
+    /* The attributes can be mass assignment */
+    protected $fillable = ['name', 'email'];
 
     /** Get the subject that taught by the lecturer */
     public function subjects():HasMany
     {
-        return $this->hasMany(Subject::class);
+        return $this->hasMany(Subject::class, 'lecturer_id');
     }
 
     /** Get all the assignments of the lecturer */
     public function assignments():HasManyThrough
     {
-        return $this->hasManyThrough(Subject::class, Assignment::class);
+        return $this->hasManyThrough(Assignment::class, Subject::class, 'lecturer_id', 'subject_id', 'lecturer_id', 'subject_id');
     }
 
     /** Get all the lectures of the lecturer*/
     public function lectures():HasManyThrough
     {
-        return $this->hasManyThrough(Subject::class, Lecture::class);
+        return $this->hasManyThrough(Lecture::class, Subject::class, 'lecturer_id', 'subject_id', 'lecturer_id', 'subject_id');
     }
 }

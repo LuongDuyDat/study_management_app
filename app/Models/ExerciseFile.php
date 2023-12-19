@@ -12,6 +12,9 @@ class ExerciseFile extends Model
     /*The table associated with the Model */
     protected $table = "exercise_file";
 
+    /* The attributes can be mass assignment */
+    protected $fillable = ['exercise_file'];
+
     /* The primary key */
     protected $primayKey = "exercise_file_id";
 }

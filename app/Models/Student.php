@@ -18,6 +18,9 @@ class Student extends Model
     /* The primary key*/
     protected $primaryKey = 'student_id';
 
+    /* The atributes that can mass assignable */
+    protected $fillable = ['name', 'class', 'email'];
+
     /** Get subjects that students learn */
     public function subjects():BelongsToMany
     {
@@ -27,19 +30,7 @@ class Student extends Model
     /**Get all exercise student have submitted */
     public function exercises():HasMany
     {
-        return $this->hasMany(StudentExercise::class);
+        return $this->hasMany(StudentExercise::class, 'student_id');
     }
 
-    /**Get all assignment student have been given */
-    public function assignments()
-    {
-        $subjects = $this->subjects();
-
-        $assignments = Collection::make(new Assignment());
-
-        foreach ($subjects as $subject) {
-            $assignments->append($subject->assignments);
-        }
-        return $assignments;
-    }
 }
